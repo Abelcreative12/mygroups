@@ -3,10 +3,10 @@ import { useParams } from "react-router-dom";
 import { MessageCircle, Users, ExternalLink, CheckCircle } from "lucide-react";
 
 const GROUP_MAP: Record<string, { name: string; link: string; invite: string }> = {
-  "group-1": { name: "Group 1", link: "https://chat.whatsapp.com/K9uh2cK4YYBCwmOYfJOpQ4", invite: "C3V8oWYifKmH12eBlb3bRd" },
-  "group-2": { name: "Group 2", link: "https://chat.whatsapp.com/Ekd8b4W3kiVFAaNyBquQyb", invite: "DrREfy1YHvgHuQoXbvdW8M" },
-  "group-3": { name: "Group 3", link: "https://chat.whatsapp.com/BTt1r1u4uBOGTztZkMer0Z", invite: "CEjx5pFax748g7bxkf3irZ" },
-  "group-4": { name: "Group 4", link: "https://chat.whatsapp.com/I1xggy39yi25RmUUogGsOT", invite: "Ctcb24OtZsp1GXsvBB5Irb" },
+  "group-1": { name: "Group 1", link: "https://chat.whatsapp.com/K9uh2cK4YYBCwmOYfJOpQ4", invite: "K9uh2cK4YYBCwmOYfJOpQ4" },
+  "group-2": { name: "Group 2", link: "https://chat.whatsapp.com/Ekd8b4W3kiVFAaNyBquQyb", invite: "Ekd8b4W3kiVFAaNyBquQyb" },
+  "group-3": { name: "Group 3", link: "https://chat.whatsapp.com/BTt1r1u4uBOGTztZkMer0Z", invite: "BTt1r1u4uBOGTztZkMer0Z" },
+  "group-4": { name: "Group 4", link: "https://chat.whatsapp.com/I1xggy39yi25RmUUogGsOT", invite: "I1xggy39yi25RmUUogGsOT" },
 };
 
 const isInAppBrowser = () => {
