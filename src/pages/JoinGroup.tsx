@@ -4,7 +4,7 @@ import { MessageCircle, Users, ExternalLink, CheckCircle } from "lucide-react";
 
 const GROUP_MAP: Record<string, { name: string; link: string; invite: string }> = {
   "group-1": { name: "Group 1", link: "https://chat.whatsapp.com/K9uh2cK4YYBCwmOYfJOpQ4", invite: "K9uh2cK4YYBCwmOYfJOpQ4" },
-  "group-2": { name: "Group 2", link: "https://chat.whatsapp.com/Ekd8b4W3kiVFAaNyBquQyb", invite: "Ekd8b4W3kiVFAaNyBquQyb" },
+  "group-2": { name: "Group 2", link: "https://chat.whatsapp.com/G1hbUID8NdMH9Ehsmq63JO", invite: "G1hbUID8NdMH9Ehsmq63JO" },
   "group-3": { name: "Group 3", link: "https://chat.whatsapp.com/BTt1r1u4uBOGTztZkMer0Z", invite: "BTt1r1u4uBOGTztZkMer0Z" },
   "group-4": { name: "Group 4", link: "https://chat.whatsapp.com/I1xggy39yi25RmUUogGsOT", invite: "I1xggy39yi25RmUUogGsOT" },
 };
