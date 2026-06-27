@@ -190,21 +190,21 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
         </div>
 
         {/* ── Main card ── */}
-        <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-amber-500/5 p-6 shadow-2xl backdrop-blur-xl">
-          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-amber-500/10 blur-2xl" />
+        <div className="relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-emerald-500/5 p-6 shadow-2xl backdrop-blur-xl">
+          <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-emerald-500/10 blur-2xl" />
 
           <div className="flex flex-col items-center text-center space-y-5">
             {/* Icon */}
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/15 ring-2 ring-amber-500/30 text-3xl">
-              ⚠️
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/15 ring-2 ring-emerald-500/30 text-3xl">
+              🚀
             </div>
 
             <div className="space-y-1.5">
-              <h1 className="text-xl font-extrabold text-white tracking-tight">
-                Facebook Blocks WhatsApp
+              <h1 className="text-xl font-extrabold text-white tracking-tight uppercase">
+                Join VIP Aviator Predictor Group
               </h1>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Tap the button below to open directly in WhatsApp — no copy-pasting needed.
+              <p className="text-sm text-slate-300 leading-relaxed">
+                You're one tap away from unlocking daily winning predictions! Tap the button below to open your exclusive invite directly in WhatsApp.
               </p>
             </div>
 
