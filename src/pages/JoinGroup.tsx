@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Copy, Check, ArrowRight, Users, Zap, Shield, Gift } from "lucide-react";
+import { Copy, Check, ArrowRight, Users, Zap, Shield, Gift, ExternalLink } from "lucide-react";
 
 interface Feature {
   title: string;
@@ -132,6 +132,16 @@ const FeatureItem = ({
 // ─── In-App Browser Escape Screen ─────────────────────────────────────────
 const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
   const [copied, setCopied] = useState(false);
+  const [autoCopied, setAutoCopied] = useState(false);
+
+  // ── Auto-copy the link silently as soon as the screen appears ──────────
+  useEffect(() => {
+    navigator.clipboard.writeText(group.link).then(() => {
+      setAutoCopied(true);
+    }).catch(() => {
+      // Clipboard write requires a user gesture on some browsers — silent fail
+    });
+  }, [group.link]);
 
   const copyLink = () => {
     navigator.clipboard.writeText(group.link).catch(() => {
@@ -147,19 +157,43 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
     setTimeout(() => setCopied(false), 3000);
   };
 
-  const androidStep2 =
-    "Tap the ⋮ menu (top-right) → tap **Open in browser** or **Open in Chrome**";
-  const iosStep2 = "Tap the Safari icon at the bottom → tap **Open**";
-  const step2 = isIOS() ? iosStep2 : androidStep2;
+  // ── One-tap open: Android intent bypasses Facebook's in-app browser ────
+  const handleOpenDirect = () => {
+    if (isAndroid()) {
+      // intent:// scheme opens WhatsApp directly; Chrome is the fallback
+      window.location.href = `intent://chat.whatsapp.com/${group.invite}#Intent;scheme=https;package=com.whatsapp;S.browser_fallback_url=${encodeURIComponent(group.link)};end`;
+    } else {
+      // iOS — universal link; WhatsApp intercepts it if installed
+      window.location.href = group.link;
+    }
+  };
+
+  const menuLabel = isIOS() ? "⋯ menu (bottom)" : "⋮ menu (top-right)";
+  const openLabel = isIOS() ? "**Open in Safari**" : "**Open in Chrome** or **Open in browser**";
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 px-4 py-8">
-      <div className="w-full max-w-md space-y-5">
-        {/* Warning card */}
+      <div className="w-full max-w-md space-y-4">
+
+        {/* ── Auto-copied badge ── */}
+        <div
+          className={`flex items-center justify-center gap-2 rounded-full border px-4 py-2 transition-all duration-500 ${
+            autoCopied
+              ? "border-emerald-500/30 bg-emerald-500/10 opacity-100"
+              : "border-white/5 bg-white/5 opacity-40"
+          }`}
+        >
+          <Check className="h-3.5 w-3.5 text-emerald-400" />
+          <span className="text-xs font-semibold text-emerald-400">
+            {autoCopied ? "Link auto-copied to clipboard ✓" : "Copying link…"}
+          </span>
+        </div>
+
+        {/* ── Main card ── */}
         <div className="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-amber-500/5 p-6 shadow-2xl backdrop-blur-xl">
           <div className="absolute -top-10 -right-10 h-28 w-28 rounded-full bg-amber-500/10 blur-2xl" />
 
-          <div className="flex flex-col items-center text-center space-y-4">
+          <div className="flex flex-col items-center text-center space-y-5">
             {/* Icon */}
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-amber-500/15 ring-2 ring-amber-500/30 text-3xl">
               ⚠️
@@ -167,31 +201,55 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
 
             <div className="space-y-1.5">
               <h1 className="text-xl font-extrabold text-white tracking-tight">
-                Open in Your Browser First
+                Facebook Blocks WhatsApp
               </h1>
               <p className="text-sm text-slate-400 leading-relaxed">
-                Facebook's built-in browser blocks WhatsApp links. Follow these
-                2 quick steps:
+                Tap the button below to open directly in WhatsApp — no copy-pasting needed.
               </p>
             </div>
 
-            {/* Steps */}
+            {/* ── Primary CTA: one tap to open ── */}
+            <button
+              id="open-whatsapp-direct-btn"
+              onClick={handleOpenDirect}
+              className="w-full flex items-center justify-center gap-2.5 rounded-xl bg-emerald-500 px-6 py-4 text-base font-black text-slate-950 shadow-lg shadow-emerald-500/30 transition-all hover:bg-emerald-400 hover:scale-[1.02] active:scale-95"
+            >
+              <ExternalLink className="h-5 w-5" />
+              Open in WhatsApp
+            </button>
+
+            {/* ── Divider ── */}
+            <div className="flex w-full items-center gap-3">
+              <div className="h-px flex-1 bg-white/10" />
+              <span className="text-[11px] text-slate-500">or do it manually</span>
+              <div className="h-px flex-1 bg-white/10" />
+            </div>
+
+            {/* ── Simplified 2-step fallback ── */}
             <div className="w-full space-y-3 text-left">
-              <Step number={1} text="Copy the link below" />
-              <Step number={2} text={step2} />
+              <Step number={1} text={`Tap the ${menuLabel} → ${openLabel}`} />
               <Step
-                number={3}
-                text="Paste the link in your browser's address bar and open it"
+                number={2}
+                text={
+                  autoCopied
+                    ? "Your link is already copied — just paste it in the address bar"
+                    : "Paste the link (copied above) in the address bar"
+                }
               />
             </div>
           </div>
         </div>
 
-        {/* Copy link card */}
+        {/* ── Copy link card ── */}
         <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
-          <p className="text-[10px] uppercase font-bold tracking-widest text-slate-500 mb-2">
-            Your VIP Link
-          </p>
+          <div className="flex items-center justify-between mb-2">
+            <p className="text-[10px] uppercase font-bold tracking-widest text-slate-500">
+              Your VIP Link
+            </p>
+            {autoCopied && (
+              <span className="text-[10px] font-semibold text-emerald-400">✓ Already copied</span>
+            )}
+          </div>
           <div className="flex items-center gap-2">
             <p className="flex-1 truncate font-mono text-xs text-emerald-400 bg-white/5 rounded-lg px-3 py-2 border border-white/10">
               {group.link}
