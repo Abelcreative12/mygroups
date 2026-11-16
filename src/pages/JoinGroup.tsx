@@ -66,8 +66,8 @@ const GROUP_MAP: Record<string, GroupInfo> = {
   "group-1": {
     name: "VIP Predictions Group 1",
     subtitle: "Join 2,000+ winners getting free daily tips",
-    link: "https://chat.whatsapp.com/K9uh2cK4YYBCwmOYfJOpQ4",
-    invite: "K9uh2cK4YYBCwmOYfJOpQ4",
+    link: "https://chat.whatsapp.com/E06OG44rC0KFY1JGVYcX0s",
+    invite: "E06OG44rC0KFY1JGVYcX0s",
     features: makeFeatures(),
     stats: makeStats(),
   },
