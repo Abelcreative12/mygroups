@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Copy, Check, ArrowRight, Users, Zap, Shield, Gift, ExternalLink } from "lucide-react";
+import { Copy, Check, ArrowRight, Users, Zap, Shield, Gift, ExternalLink, AlertTriangle } from "lucide-react";
 
 interface Feature {
   title: string;
@@ -35,45 +35,45 @@ const isIOS = (): boolean =>
 // ─── Group data ───────────────────────────────────────────────────────────
 const makeFeatures = (): Feature[] => [
   {
-    title: "Real-Time Predictions",
-    description: "Instant notifications before each round — be first to act.",
+    title: "Real-Time Updates",
+    description: "Instant notifications and announcements — stay informed daily.",
     icon: <Zap className="h-3.5 w-3.5" />,
   },
   {
     title: "Expert Analysis",
-    description: "Detailed pattern breakdowns from seasoned analysts.",
+    description: "Detailed pattern breakdowns and educational insights from analysts.",
     icon: <Shield className="h-3.5 w-3.5" />,
   },
   {
     title: "Active Community",
-    description: "2,000+ members sharing wins and strategies daily.",
+    description: "2,000+ members sharing insights and learning together.",
     icon: <Users className="h-3.5 w-3.5" />,
   },
   {
     title: "100% Free Access",
-    description: "No subscriptions, no hidden fees. Ever.",
+    description: "No fees, no subscriptions, and strictly no gambling stakes. Ever.",
     icon: <Gift className="h-3.5 w-3.5" />,
   },
 ];
 
 const makeStats = (): Stat[] => [
-  { value: "95%+", label: "Win Rate" },
+  { value: "100%", label: "Free" },
   { value: "2,000+", label: "Members" },
-  { value: "24/7", label: "Support" },
+  { value: "24/7", label: "Active" },
 ];
 
 const GROUP_MAP: Record<string, GroupInfo> = {
   "group-1": {
     name: "VIP Predictions Group 1",
     subtitle: "Join 2,000+ winners getting free daily tips",
-    link: "https://chat.whatsapp.com/E06OG44rC0KFY1JGVYcX0s",
-    invite: "E06OG44rC0KFY1JGVYcX0s",
+    link: "https://chat.whatsapp.com/K9uh2cK4YYBCwmOYfJOpQ4",
+    invite: "K9uh2cK4YYBCwmOYfJOpQ4",
     features: makeFeatures(),
     stats: makeStats(),
   },
   "group-2": {
-    name: "VIP Predictions Group 2",
-    subtitle: "Join 2,000+ winners getting free daily tips",
+    name: "VIP Community Group 2",
+    subtitle: "Join 2,000+ members in our free educational community",
     link: "https://chat.whatsapp.com/G1hbUID8NdMH9Ehsmq63JO",
     invite: "G1hbUID8NdMH9Ehsmq63JO",
     features: makeFeatures(),
@@ -82,14 +82,14 @@ const GROUP_MAP: Record<string, GroupInfo> = {
   "group-3": {
     name: "VIP Predictions Group 3",
     subtitle: "Join 2,000+ winners getting free daily tips",
-    link: "https://chat.whatsapp.com/H5SjnWOTHUQ42k9tKg6bCw",
-    invite: "H5SjnWOTHUQ42k9tKg6bCw",
+    link: "https://chat.whatsapp.com/BTt1r1u4uBOGTztZkMer0Z",
+    invite: "BTt1r1u4uBOGTztZkMer0Z",
     features: makeFeatures(),
     stats: makeStats(),
   },
   "group-4": {
-    name: "VIP Predictions Group 4",
-    subtitle: "Join 2,000+ winners getting free daily tips",
+    name: "VIP Community Group 4",
+    subtitle: "Join 2,000+ members in our free educational community",
     link: "https://chat.whatsapp.com/I1xggy39yi25RmUUogGsOT",
     invite: "I1xggy39yi25RmUUogGsOT",
     features: makeFeatures(),
@@ -109,6 +109,25 @@ const openWhatsApp = (group: GroupInfo) => {
 };
 
 // ─── Sub-components ───────────────────────────────────────────────────────
+const AntiGamblingNotice = () => (
+  <div className="w-full rounded-2xl border border-amber-500/30 bg-amber-500/10 p-3.5 text-left backdrop-blur-md space-y-2">
+    <div className="flex items-center gap-2">
+      <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/20 text-amber-400">
+        <AlertTriangle className="h-3.5 w-3.5" />
+      </div>
+      <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
+        Anti-Gambling Notice & Policy
+      </span>
+    </div>
+    <p className="text-xs text-amber-100/90 leading-relaxed">
+      <strong>This is NOT a gambling group.</strong> We do <strong>not</strong> promote, conduct, facilitate, or encourage online gambling, sports betting, casino games, or real-money wagering of any kind.
+    </p>
+    <p className="text-[11px] text-amber-200/75 leading-relaxed pt-1.5 border-t border-amber-500/20">
+      This community is strictly for educational discussions, insights, and general networking. Access is 100% free with no monetary stakes or wagering permitted.
+    </p>
+  </div>
+);
+
 const FeatureItem = ({
   title,
   description,
@@ -177,11 +196,10 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
 
         {/* ── Auto-copied badge ── */}
         <div
-          className={`flex items-center justify-center gap-2 rounded-full border px-4 py-2 transition-all duration-500 ${
-            autoCopied
+          className={`flex items-center justify-center gap-2 rounded-full border px-4 py-2 transition-all duration-500 ${autoCopied
               ? "border-emerald-500/30 bg-emerald-500/10 opacity-100"
               : "border-white/5 bg-white/5 opacity-40"
-          }`}
+            }`}
         >
           <Check className="h-3.5 w-3.5 text-emerald-400" />
           <span className="text-xs font-semibold text-emerald-400">
@@ -196,17 +214,20 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
           <div className="flex flex-col items-center text-center space-y-5">
             {/* Icon */}
             <div className="flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500/15 ring-2 ring-emerald-500/30 text-3xl">
-              🚀
+              💬
             </div>
 
             <div className="space-y-1.5">
               <h1 className="text-xl font-extrabold text-white tracking-tight uppercase">
-                Join VIP Aviator Predictor Group
+                {group.name}
               </h1>
               <p className="text-sm text-slate-300 leading-relaxed">
-                You're one tap away from unlocking daily winning predictions! Tap the button below to open your exclusive invite directly in WhatsApp.
+                Connect with our official community on WhatsApp. Tap the button below to open your exclusive invite directly.
               </p>
             </div>
+
+            {/* ── Prominent Anti-Gambling Policy ── */}
+            <AntiGamblingNotice />
 
             {/* ── Primary CTA: one tap to open ── */}
             <button
@@ -244,7 +265,7 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
         <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
           <div className="flex items-center justify-between mb-2">
             <p className="text-[10px] uppercase font-bold tracking-widest text-slate-500">
-              Your VIP Link
+              Your VIP Invite Link
             </p>
             {autoCopied && (
               <span className="text-[10px] font-semibold text-emerald-400">✓ Already copied</span>
@@ -275,8 +296,13 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
         </div>
 
         {/* Reassurance */}
-        <p className="text-center text-xs text-slate-600">
-          🔒 Free · No spam · You can leave anytime
+        <p className="text-center text-xs text-slate-500">
+          🔒 Free to join · Strictly Non-Gambling · Leave anytime
+        </p>
+
+        {/* Legal / Policy Compliance Notice */}
+        <p className="text-center text-[10px] text-slate-600 leading-normal max-w-xs mx-auto">
+          Compliance Disclaimer: Not affiliated with Facebook, Meta, or WhatsApp. This group does not promote or facilitate gambling, real-money wagering, or betting activities.
         </p>
       </div>
     </div>
@@ -331,7 +357,7 @@ const JoinGroup = () => {
 
   const copyInviteLink = () => {
     if (!group) return;
-    navigator.clipboard.writeText(group.link).catch(() => {});
+    navigator.clipboard.writeText(group.link).catch(() => { });
     setCopied(true);
     setTimeout(() => setCopied(false), 2500);
   };
@@ -379,7 +405,7 @@ const JoinGroup = () => {
             <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 border border-emerald-500/20">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400">
-                Exclusive VIP Invite
+                Official Community Invite
               </span>
             </div>
 
@@ -392,6 +418,9 @@ const JoinGroup = () => {
                 {group.subtitle}
               </p>
             </div>
+
+            {/* Anti-Gambling Notice & Policy Banner */}
+            <AntiGamblingNotice />
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-2 w-full bg-white/5 border border-white/10 rounded-2xl p-4">
@@ -434,7 +463,7 @@ const JoinGroup = () => {
                 ) : (
                   <>
                     <ArrowRight className="h-5 w-5" />
-                    Join the VIP Group Now
+                    Join the Community Group Now
                   </>
                 )}
               </button>
@@ -443,7 +472,7 @@ const JoinGroup = () => {
                 className="text-center text-xs text-slate-500 font-medium"
                 id="redirect-status"
               >
-                🔒 Free to join · No spam · Leave anytime
+                🔒 Free to join · Strictly Non-Gambling · Leave anytime
               </p>
             </div>
 
@@ -472,6 +501,11 @@ const JoinGroup = () => {
             </div>
           </div>
         </div>
+
+        {/* Legal / Policy Compliance Notice */}
+        <p className="text-center text-[10px] text-slate-600 leading-normal max-w-sm mx-auto">
+          Compliance Disclaimer: Not affiliated with Facebook, Meta, or WhatsApp. This group does not promote, provide, or facilitate online gambling or real-money wagering.
+        </p>
 
         <p className="text-center text-xs text-slate-700">
           Auto-redirect active · WhatsApp Universal Link
