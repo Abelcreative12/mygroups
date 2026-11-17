@@ -331,18 +331,6 @@ const JoinGroup = () => {
   const [copied, setCopied] = useState(false);
   const inApp = useMemo(() => isInAppBrowser(), []);
 
-  // ── Auto-redirect users who arrive via a real browser ──────────────────
-  useEffect(() => {
-    if (!group || inApp) return;
-
-    // Give the page 800ms to paint so user sees the brand, then redirect
-    const timer = setTimeout(() => {
-      openWhatsApp(group);
-    }, 800);
-
-    return () => clearTimeout(timer);
-  }, [group, inApp]);
-
   // ── If inside Facebook/Instagram in-app browser, show escape screen ────
   if (group && inApp) {
     return <InAppBrowserScreen group={group} />;
@@ -381,16 +369,6 @@ const JoinGroup = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950 px-4 py-8 md:py-12">
       <div className="w-full max-w-md space-y-5" id="redirect-container">
-
-        {/* Auto-redirect notice */}
-        {!inApp && (
-          <div className="flex items-center justify-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-4 py-2">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-            <span className="text-xs font-semibold text-emerald-400">
-              Opening WhatsApp automatically…
-            </span>
-          </div>
-        )}
 
         {/* Glassmorphic card */}
         <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-6 md:p-8 shadow-2xl backdrop-blur-xl">
@@ -508,7 +486,7 @@ const JoinGroup = () => {
         </p>
 
         <p className="text-center text-xs text-slate-700">
-          Auto-redirect active · WhatsApp Universal Link
+          Official Community Invite · WhatsApp Universal Link
         </p>
       </div>
     </div>
