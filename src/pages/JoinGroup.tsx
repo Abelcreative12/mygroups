@@ -64,8 +64,8 @@ const makeStats = (): Stat[] => [
 
 const GROUP_MAP: Record<string, GroupInfo> = {
   "group-1": {
-    name: "VIP Predictions Group 1",
-    subtitle: "Join 2,000+ winners getting free daily tips",
+    name: "VIP Community Group 1",
+    subtitle: "Join 2,000+ members in our free educational community",
     link: "https://chat.whatsapp.com/E06OG44rC0KFY1JGVYcX0s",
     invite: "E06OG44rC0KFY1JGVYcX0s",
     features: makeFeatures(),
@@ -80,8 +80,8 @@ const GROUP_MAP: Record<string, GroupInfo> = {
     stats: makeStats(),
   },
   "group-3": {
-    name: "VIP Predictions Group 3",
-    subtitle: "Join 2,000+ winners getting free daily tips",
+    name: "VIP Community Group 3",
+    subtitle: "Join 2,000+ members in our free educational community",
     link: "https://chat.whatsapp.com/BTt1r1u4uBOGTztZkMer0Z",
     invite: "BTt1r1u4uBOGTztZkMer0Z",
     features: makeFeatures(),
