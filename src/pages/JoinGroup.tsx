@@ -66,8 +66,8 @@ const GROUP_MAP: Record<string, GroupInfo> = {
   "group-1": {
     name: "VIP Predictions Group 1",
     subtitle: "Join 2,000+ winners getting free daily tips",
-    link: "https://chat.whatsapp.com/K9uh2cK4YYBCwmOYfJOpQ4",
-    invite: "K9uh2cK4YYBCwmOYfJOpQ4",
+    link: "https://chat.whatsapp.com/E06OG44rC0KFY1JGVYcX0s",
+    invite: "E06OG44rC0KFY1JGVYcX0s",
     features: makeFeatures(),
     stats: makeStats(),
   },
@@ -197,8 +197,8 @@ const InAppBrowserScreen = ({ group }: { group: GroupInfo }) => {
         {/* ── Auto-copied badge ── */}
         <div
           className={`flex items-center justify-center gap-2 rounded-full border px-4 py-2 transition-all duration-500 ${autoCopied
-              ? "border-emerald-500/30 bg-emerald-500/10 opacity-100"
-              : "border-white/5 bg-white/5 opacity-40"
+            ? "border-emerald-500/30 bg-emerald-500/10 opacity-100"
+            : "border-white/5 bg-white/5 opacity-40"
             }`}
         >
           <Check className="h-3.5 w-3.5 text-emerald-400" />
